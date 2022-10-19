@@ -29,5 +29,5 @@ Default configuration should always work for your user, if your user is in `whee
 `runas [ -U uid ] [ -G gid] [ -S ] [ command ]`:
 - `-U` -> set custom user id (default is 0),
 - `-G` -> set custom group id (default is 0),
-- `-S` -> run shell
+- `-S` -> run shell<br>
 `-S` or command is required.
