@@ -27,7 +27,7 @@ Default configuration should always work for your user, if your user is in `whee
 
 ## Usage
 ```
-runas [ -U uid ] [ -G gid ]  -S | command
+runas [ -U uid ] [ -G gid ]  -S <or> command
 ```
 - `-U` -> set custom user id (default is 0),
 - `-G` -> set custom group id (default is 0),
