@@ -16,7 +16,7 @@ cmake ..
 make install
 ```
 
-Not on every system `persist` will work. You can disable it by running command bellow instead of `cmake ..`:
+On some systems `persist` may not work. You can disable it by running command bellow instead of `cmake ..`:
 ```sh
 cmake -DDISABLE_PERSIST=ON ..
 ```
@@ -26,8 +26,9 @@ Default configuration will be installed to `${CMAKE_INSTALL_PREFIX}/etc/runas.co
 Default configuration should always work for your user, if your user is in `wheel` group.
 
 ## Usage
-`runas [ -U uid ] [ -G gid] [ -S ] [ command ]`:
+```
+runas [ -U uid ] [ -G gid ]  -S | command
+```
 - `-U` -> set custom user id (default is 0),
 - `-G` -> set custom group id (default is 0),
 - `-S` -> run shell<br>
-`-S` or command is required.
