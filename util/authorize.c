@@ -36,9 +36,9 @@ int authorize(uid_t uid, gid_t gid) {
 
 	// Set specific for runas env variables
 	char env[1024];
-	sprintf(env, "RUNAS_USER=%s", current_user->pw_name);
+	sprintf(env, "USSU_USER=%s", current_user->pw_name);
 	putenv(strdup(env));
-	sprintf(env, "RUNAS_UID=%u", current_user->pw_uid);
+	sprintf(env, "USSU_UID=%u", current_user->pw_uid);
 	putenv(strdup(env));
 
 	// Check if user is allowed to use their password
@@ -66,7 +66,7 @@ int authorize(uid_t uid, gid_t gid) {
 #ifndef PERSIST_DISABLE
 	char persist_base[PATH_MAX];
 	char path[PATH_MAX];
-	sprintf(persist_base, "/run/auth");
+	sprintf(persist_base, "/run/ussu");
 	sprintf(path, "%s/%u", persist_base, getppid());
 
 	if (info->persist && !info->nopasswd) {

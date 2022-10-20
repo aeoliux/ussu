@@ -19,13 +19,13 @@ struct permission *isAllowed(const char *username) {
 	char *buf = NULL;
 
 	// Get configuration file path
-	char confpath[PATH_MAX] = PREFIX "/etc/runas.conf";
+	char confpath[PATH_MAX] = PREFIX "/etc/ussu.conf";
 
 	// Open runas configuration
 	if (!access(confpath, R_OK)) {
 		buf = readFile(confpath);
-	} else if (!access("/etc/runas.conf", R_OK)) {
-		buf = readFile("/etc/runas.conf");
+	} else if (!access("/etc/ussu.conf", R_OK)) {
+		buf = readFile("/etc/ussu.conf");
 	} else {
 		// unless it exists, set errno to 'No such file or directory'
 		errno = ENOENT;

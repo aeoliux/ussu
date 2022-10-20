@@ -1,4 +1,4 @@
-# runas
+# ussu
 A tool for authentication user accounts for POSIX-compatible operating systems.
 
 ## Building
@@ -22,13 +22,14 @@ cmake -DDISABLE_PERSIST=ON ..
 ```
 
 ## Configuration
-Default configuration will be installed to `${CMAKE_INSTALL_PREFIX}/etc/runas.conf` (by default `/usr/local/etc/runas.conf`).
+Default configuration will be installed to `${CMAKE_INSTALL_PREFIX}/etc/ussu.conf` (by default `/usr/local/etc/ussu.conf`).
 Default configuration should always work for your user, if your user is in `wheel` group.
 
 ## Usage
 ```
-runas [ -U uid ] [ -G gid ]  -S <or> command
+ussu [ -U uid ] [ -G gid ] -C <or> -S <or> command
 ```
 - `-U` -> set custom user id (default is 0),
 - `-G` -> set custom group id (default is 0),
-- `-S` -> run shell<br>
+- `-S` -> run shell
+- `-C` -> reset persist data. Only works if persist is enabled.
