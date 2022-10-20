@@ -21,7 +21,7 @@ struct permission *isAllowed(const char *username) {
 	// Get configuration file path
 	char confpath[PATH_MAX] = PREFIX "/etc/ussu.conf";
 
-	// Open runas configuration
+	// Open ussu configuration
 	if (!access(confpath, R_OK)) {
 		buf = readFile(confpath);
 	} else if (!access("/etc/ussu.conf", R_OK)) {

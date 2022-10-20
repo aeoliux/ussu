@@ -26,7 +26,7 @@ int authorize(uid_t uid, gid_t gid) {
 		return -1;
 	}
 
-	// Check for permission to use runas
+	// Check for permission to use ussu
 	struct permission *info = isAllowed(current_user->pw_name);
 	if (!info) {
 		show_errno = true;
@@ -34,7 +34,7 @@ int authorize(uid_t uid, gid_t gid) {
 		return -1;
 	}
 
-	// Set specific for runas env variables
+	// Set specific for ussu env variables
 	char env[1024];
 	sprintf(env, "USSU_USER=%s", current_user->pw_name);
 	putenv(strdup(env));
