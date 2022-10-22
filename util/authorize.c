@@ -136,6 +136,11 @@ int authorize(uid_t uid, gid_t gid) {
 
 			// Compare crypted user's password with crypted typed password
 			if (strcmp(crypted, passwd)) {
+#ifdef ANTI_BRUTE_FORCE
+				if (info->sec)
+					sleep(info->sec);
+#endif
+
 				show_errno = false;
 				sprintf(message, "invalid password");
 

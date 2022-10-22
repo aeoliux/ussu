@@ -3,7 +3,8 @@ A tool for authentication user accounts for POSIX-compatible operating systems.
 
 ## Building
 ### Dependencies
-- Working C library
+- C library
+- POSIX-compatible libcrypt
 
 ### Build dependencies
 - A C compiler
@@ -11,14 +12,21 @@ A tool for authentication user accounts for POSIX-compatible operating systems.
 
 ### Compilation and installation
 ```sh
-mkdir -p build && cd build
-cmake ..
+cmake .
 make install
 ```
 
 On some systems `persist` may not work. You can disable it by running command bellow instead of `cmake ..`:
 ```sh
-cmake -DDISABLE_PERSIST=ON ..
+rm -f CMakeCache.txt
+cmake -DDISABLE_PERSIST=ON .
+```
+
+### Anti-brute force
+If you want to prevent from being attacked by brute force method, add `-DANTI_BRUTE_FORCE=ON` to cmake options:
+```sh
+rm -f CMakeCache.txt
+cmake -DANTI_BRUTE_FORCE=ON .
 ```
 
 ## Configuration

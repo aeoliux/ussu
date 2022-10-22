@@ -39,6 +39,11 @@ struct permission *isAllowed(const char *username) {
 		return NULL;
 	}
 
+#ifdef ANTI_BRUTE_FORCE
+	// Buffer for anti-bruteforce
+	unsigned int sec = 0;
+#endif
+
 	// Iterate over lines
 	for (size_t i = 0; lines[i] != NULL; i++) {
 		// Split words
@@ -60,6 +65,17 @@ struct permission *isAllowed(const char *username) {
 			}
 		}
 
+		// Tweak class
+		if (words[0][0] == '.') {
+#ifdef ANTI_BRUTE_FORCE
+			// Get seconds for anti-bruteforce
+			if (!strcmp(&words[0][1], "anti-bruteforce")) {
+				sscanf(words[1], "%u", &sec);
+			}
+#endif
+			continue;
+		}
+
 		// Compare first word with the username
 		if (!strcmp(words[0], username) || pass) {
 			// Allocate permission struct
@@ -76,6 +92,9 @@ struct permission *isAllowed(const char *username) {
 #endif
 			perm->nopasswd = false;
 			perm->userpasswd = false;
+#ifdef ANTI_BRUTE_FORCE
+			perm->sec = sec;
+#endif
 
 			// Iterate over words and set settings
 			for (size_t i2 = 1; words[i2] != NULL; i2++) {

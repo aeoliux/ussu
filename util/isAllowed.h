@@ -6,6 +6,9 @@
 
 struct permission {
 	bool nopasswd;
+#ifdef ANTI_BRUTE_FORCE
+	unsigned int sec;
+#endif
 #ifndef PERSIST_DISABLE
 	bool persist;
 #endif

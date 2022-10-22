@@ -2,14 +2,18 @@ cmake_minimum_required(VERSION 3.22)
 project(
 		ussu
 		LANGUAGES C
-		VERSION 1.0.0
+		VERSION 1.1.0
 		DESCRIPTION "A account authentication tool for POSIX-compatible operating systems"
 		HOMEPAGE_URL "https://github.com/zapomnij/ussu"
 )
 
+option(ANTI_BRUTE_FORCE "Enable anti-bruteforce feature" OFF)
 option(DISABLE_PERSIST "Disable session persist" OFF)
 
 set(CMAKE_C_STANDARD 99)
+if (ANTI_BRUTE_FORCE)
+	add_compile_options(-DANTI_BRUTE_FORCE)
+endif()
 if (DISABLE_PERSIST)
 	add_compile_options(-DPERSIST_DISABLE)
 endif()
