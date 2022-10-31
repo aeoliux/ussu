@@ -2,13 +2,14 @@ cmake_minimum_required(VERSION 3.22)
 project(
 		ussu
 		LANGUAGES C
-		VERSION 1.1.0
+		VERSION 1.1.1
 		DESCRIPTION "A account authentication tool for POSIX-compatible operating systems"
 		HOMEPAGE_URL "https://github.com/zapomnij/ussu"
 )
 
 option(ANTI_BRUTE_FORCE "Enable anti-bruteforce feature" OFF)
 option(DISABLE_PERSIST "Disable session persist" OFF)
+option(INSTALL_ZSH_COMPLETION "Install CLI completion for Zsh" ON)
 
 set(CMAKE_C_STANDARD 99)
 if (ANTI_BRUTE_FORCE)
@@ -36,3 +37,10 @@ install(
 		FILES ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE
 		DESTINATION ${CMAKE_INSTALL_PREFIX}/share/licenses/${CMAKE_PROJECT_NAME}-${CMAKE_PROJECT_VERSION}
 )
+
+if (INSTALL_ZSH_COMPLETION)
+	install(
+			FILES ${CMAKE_CURRENT_SOURCE_DIR}/zsh/_ussu
+			DESTINATION ${CMAKE_INSTALL_PREFIX}/share/zsh/site-functions
+	)
+endif()

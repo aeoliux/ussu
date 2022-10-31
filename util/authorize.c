@@ -1,3 +1,27 @@
+/*
+MIT License
+
+Copyright (c) 2022 Jacek
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
 #include "authorize.h"
 #include "isAllowed.h"
 #include "util.h"
@@ -35,11 +59,12 @@ int authorize(uid_t uid, gid_t gid) {
 	}
 
 	// Set specific for ussu env variables
-	char env[1024];
-	sprintf(env, "USSU_USER=%s", current_user->pw_name);
-	putenv(strdup(env));
-	sprintf(env, "USSU_UID=%u", current_user->pw_uid);
-	putenv(strdup(env));
+	char env1[1024];
+	sprintf(env1, "USSU_USER=%s", current_user->pw_name);
+	putenv(env1);
+	char env2[1024];
+	sprintf(env2, "USSU_UID=%u", current_user->pw_uid);
+	putenv(env2);
 
 	// Check if user is allowed to use their password
 	if (info->userpasswd) {
@@ -185,14 +210,17 @@ int authorize(uid_t uid, gid_t gid) {
 	// Set essential env variables
 	struct passwd *user = getpwuid(uid);
 	if (user) {
-		sprintf(env, "USER=%s", user->pw_name);
-		putenv(strdup(env));
+		char env3[1024];
+		sprintf(env3, "USER=%s", user->pw_name);
+		putenv(env3);
 
-		sprintf(env, "HOME=%s", user->pw_dir);
-		putenv(strdup(env));
+		char env4[1024];
+		sprintf(env4, "HOME=%s", user->pw_dir);
+		putenv(env4);
 
-		sprintf(env, "SHELL=%s", user->pw_shell);
-		putenv(strdup(env));
+		char env5[1024];
+		sprintf(env5, "SHELL=%s", user->pw_shell);
+		putenv(env5);
 	}
 
 	return 0;
